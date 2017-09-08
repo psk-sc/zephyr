@@ -1,0 +1,6 @@
+if BOARD_ARTY_SCR1
+
+config BOARD
+	default "arty_scr1"
+
+endif

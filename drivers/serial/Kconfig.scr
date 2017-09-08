@@ -1,0 +1,13 @@
+# Kconfig.scr - scr UART configuration option
+#
+# Copyright (C) Syntacore 2015-2017. All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig UART_SCR
+	bool "riscv UART driver for SCR based SoCs"
+	depends on SOC_SERIES_RISCV32_SCR1
+	default n
+	select SERIAL_HAS_DRIVER
+	help
+	Enable the UART driver for SCR based SoCs.

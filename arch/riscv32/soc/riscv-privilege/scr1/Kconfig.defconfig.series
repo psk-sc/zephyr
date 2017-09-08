@@ -1,0 +1,59 @@
+if SOC_SERIES_RISCV32_SCR1
+
+config SOC_SERIES
+	string
+	default "scr1"
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	int
+	default 25000000
+
+config RISCV_SOC_INTERRUPT_INIT
+	bool
+	default y
+
+config RISCV_HAS_CPU_IDLE
+	bool
+	default y
+
+config NUM_IRQS
+    int
+    default 32
+
+config XIP
+	bool
+	default y
+
+config RISCV_RAM_BASE_ADDR
+	hex
+	default	0xffff0000
+
+config RISCV_RAM_SIZE_KB
+	int
+	default 64
+
+config RISCV_TCM_BASE_ADDR
+	hex
+	default	0xf0000000
+
+config RISCV_TCM_SIZE_KB
+	int
+	default 64
+
+config RISCV_RESET_VEC_ADDR
+	hex
+	default	0xffffff00
+
+config RISCV_MACHINE_TRAP_ADDR
+	hex
+	default	0xffffff80
+
+config RISCV_MTIME_BASE
+	hex
+	default	0xf0040000
+
+config SCR_UART_BASE
+	hex
+	default	0xff010000
+
+endif # SOC_SERIES_RISCV32_SCR1

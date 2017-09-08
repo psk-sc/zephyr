@@ -5,6 +5,7 @@ obj-$(CONFIG_ALTERA_AVALON_TIMER) += altera_avalon_timer.o
 obj-$(CONFIG_NRF_RTC_TIMER) += nrf_rtc_timer.o
 obj-$(CONFIG_PULPINO_TIMER) += pulpino_timer.o
 obj-$(CONFIG_RISCV_MACHINE_TIMER) += riscv_machine_timer.o
+obj-$(CONFIG_SCR1_MACHINE_TIMER) += scr1_machine_timer.o
 obj-$(CONFIG_RISCV_QEMU_TIMER) += riscv_qemu_timer.o
 obj-$(CONFIG_XTENSA_TIMER) += xtensa_sys_timer.o
 
