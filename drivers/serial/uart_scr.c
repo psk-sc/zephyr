@@ -15,28 +15,31 @@
 
 static inline void scr_uart_write(uintptr_t uart_base, unsigned reg, uint8_t val)
 {
-    *(volatile uint8_t *)(uart_base + reg) = val;
+    *(volatile uint32_t *)(uart_base + reg) = val;
 }
 
 static inline uint8_t scr_uart_read(uintptr_t uart_base, unsigned reg)
 {
-    return *(volatile uint8_t *)(uart_base + reg);
+    return *(volatile uint32_t *)(uart_base + reg);
 }
-
 
 static int uart_scr_init(struct device *dev)
 {
+    uintptr_t uart_base = DEV_CFG(dev)->regs;
+
     /* disable interrupts */
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_IER, 0);
+    scr_uart_write(uart_base, SCR_UART_IER, 0);
     /* init MCR */
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_MCR, 0);
+    scr_uart_write(uart_base, SCR_UART_MCR, 0);
     /* setup baud rate */
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_CONTROL, 0x3 | 0x80);
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_DIV_LO, SCR_UART_115200_CLK_DIVISOR & 0xff);
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_DIV_HI, (SCR_UART_115200_CLK_DIVISOR >> 8) & 0xff);
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_CONTROL, 0x3);
+    scr_uart_write(uart_base, SCR_UART_CONTROL, 0x3 | 0x80);
+    scr_uart_write(uart_base, SCR_UART_DIV_LO, SCR_UART_115200_CLK_DIVISOR & 0xff);
+    scr_uart_write(uart_base, SCR_UART_DIV_HI, (SCR_UART_115200_CLK_DIVISOR >> 8) & 0xff);
+    scr_uart_write(uart_base, SCR_UART_CONTROL, 0x3);
     /* reset fifo and disable */
-    scr_uart_write(DEV_CFG(dev)->regs, SCR_UART_FCR, (1 << 1));
+    scr_uart_write(uart_base, SCR_UART_FCR, (1 << 1));
+    /* clear rx */
+    scr_uart_read(SCR_UART0_PORT, SCR_UART_RXD);
 
 	return 0;
 }

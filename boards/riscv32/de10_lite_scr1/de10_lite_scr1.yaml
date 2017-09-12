@@ -1,0 +1,11 @@
+identifier: de10_lite_scr1
+name: DE10-Lite SCR1
+type: mcu
+arch: riscv32
+toolchain:
+  - zephyr
+ram: 32
+testing:
+  ignore_tags:
+    - net
+    - bluetooth

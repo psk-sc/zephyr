@@ -1,0 +1,6 @@
+if BOARD_DE10_LITE_SCR1
+
+config BOARD
+	default "de10_lite_scr1"
+
+endif

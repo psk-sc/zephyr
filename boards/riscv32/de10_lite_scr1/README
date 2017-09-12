@@ -1,0 +1,11 @@
+Zephyr build guide
+==================
+
+To build Zephyr OS image
+
+Define environment variables:
+
+export RISCV32_TOOLCHAIN_PATH=~/path/to/riscv-toolchain
+export ZEPHYR_GCC_VARIANT=riscv32
+
+BOARD variable must be set to BOARD=de10_lite_scr1.
