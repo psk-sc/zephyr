@@ -44,6 +44,13 @@
 #define MTIME_REG	DT_INST_REG_ADDR(0)
 #define MTIMECMP_REG	(DT_INST_REG_ADDR(0) + 8)
 #define TIMER_IRQN	DT_INST_IRQN(0)
+/* scr,machine-timer*/
+#elif DT_HAS_COMPAT_STATUS_OKAY(scr_machine_timer)
+#define DT_DRV_COMPAT scr_machine_timer
+
+#define MTIME_REG	(DT_INST_REG_ADDR(0) + 8)
+#define MTIMECMP_REG	(DT_INST_REG_ADDR(0) + 16)
+#define TIMER_IRQN	DT_INST_IRQN(0)
 #endif
 
 #define CYC_PER_TICK ((uint32_t)((uint64_t) (sys_clock_hw_cycles_per_sec()			 \

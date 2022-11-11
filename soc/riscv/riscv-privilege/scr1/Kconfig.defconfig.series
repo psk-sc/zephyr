@@ -1,0 +1,27 @@
+if SOC_SERIES_RISCV32_SCR1
+
+config SOC_SERIES
+	string
+	default "scr1"
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	int
+	default 90000000
+
+config RISCV_SOC_INTERRUPT_INIT
+	bool
+	default y
+
+config RISCV_HAS_CPU_IDLE
+	bool
+	default y
+
+config NUM_IRQS
+	int
+	default 32
+
+config XIP
+	bool
+	default y
+
+endif # SOC_SERIES_RISCV32_SCR1
