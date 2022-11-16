@@ -48,6 +48,7 @@
 #elif DT_HAS_COMPAT_STATUS_OKAY(scr_machine_timer)
 #define DT_DRV_COMPAT scr_machine_timer
 
+#define MTIMEDIV_REG	(DT_INST_REG_ADDR(0) + 4)
 #define MTIME_REG	(DT_INST_REG_ADDR(0) + 8)
 #define MTIMECMP_REG	(DT_INST_REG_ADDR(0) + 16)
 #define TIMER_IRQN	DT_INST_IRQN(0)
@@ -90,6 +91,15 @@ static void set_mtimecmp(uint64_t time)
 	r[0] = (uint32_t)time;
 	r[1] = (uint32_t)(time >> 32);
 #endif
+}
+
+static void set_divider(uint32_t divider)
+{
+#ifdef MTIMEDIV_REG
+	*(volatile uint32_t *)MTIMEDIV_REG = divider;
+#else
+	ARG_UNUSED(divider);
+#endif /* MTIMEDIV_REG */
 }
 
 static uint64_t mtime(void)
@@ -199,6 +209,8 @@ uint64_t sys_clock_cycle_get_64(void)
 static int sys_clock_driver_init(const struct device *dev)
 {
 	ARG_UNUSED(dev);
+
+	set_divider(CONFIG_RISCV_MACHINE_TIMER_SYSTEM_CLOCK_DIVIDER);
 
 	IRQ_CONNECT(TIMER_IRQN, 0, timer_isr, NULL, 0);
 	last_count = mtime();
