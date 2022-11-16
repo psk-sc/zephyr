@@ -30,5 +30,19 @@ static ALWAYS_INLINE _cpu_t *arch_curr_cpu(void)
 	return &_kernel.cpus[arch_proc_id()];
 }
 
+#ifdef CONFIG_RISCV_ISA_EXT_ZIFENCEI
+
+static inline void ifence(void)
+{
+    __asm__ volatile ("fence.i" ::: "memory");
+}
+
+#endif /* CONFIG_RISCV_ISA_EXT_ZIFENCEI */
+
+static inline void fence(void)
+{
+    __asm__ volatile ("fence" ::: "memory");
+}
+
 #endif /* !_ASMLANGUAGE */
 #endif /* ZEPHYR_INCLUDE_ARCH_RISCV_ARCH_INLINES_H_ */

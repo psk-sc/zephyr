@@ -1,0 +1,12 @@
+identifier: vcu118_scr7
+name: VCU118 FPGA SCR7
+type: mcu
+simulation: qemu
+arch: riscv64
+toolchain:
+  - zephyr
+ram: 32
+testing:
+  ignore_tags:
+    - net
+    - bluetooth

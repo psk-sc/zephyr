@@ -32,12 +32,6 @@
 			interrupts = <7 0>;
 			interrupt-parent = < &ipic >;
 		};
-
-		tcm: memory@f0000000 {
-			compatible = "zephyr,memory-region";
-			reg = <0xf0000000 DT_SIZE_K(64)>;
-			zephyr,memory-region = "TCM";
-		};
 		
 		ipic: interrupt-controller@bf0 {
 			compatible = "riscv,cpu-intc";

@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 2022 Syntacore
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+
+#include "syntacore/scr7.dtsi"
+
+/ {
+	model = "vcu118_scr7";
+	compatible = "scr,vcu118_scr7";
+
+	soc {
+		ram: memory@0 {
+			compatible = "zephyr,memory-region";
+			reg = <0x0 0x00000000 DT_SIZE_M(64)>;
+			zephyr,memory-region = "RAM";
+		};
+	};
+
+	chosen {
+		zephyr,console = &uart0;
+	};
+};
+
