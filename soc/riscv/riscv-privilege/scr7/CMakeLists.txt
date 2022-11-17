@@ -5,4 +5,5 @@ zephyr_sources(
   soc.c
   mpu.c
   cache.c
+  plic.c
 )

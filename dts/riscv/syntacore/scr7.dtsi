@@ -33,13 +33,6 @@
 			i-cache-size = <cpu0_icsz: 32768>;
 
 			next-level-cache = <&L2>;
-
-			CPU0_intc: interrupt-controller0 {
-				#address-cells = <0>;
-				#interrupt-cells = <1>;
-				interrupt-controller;
-				compatible = "riscv,cpu-intc";
-			};
 		};
 
 		L2: l2-cache {
@@ -49,6 +42,13 @@
 			cache-sets = <l2_sets: 2048>;
 			cache-block-size = <l2_bs: 32>;
 			cache-level = <2>;
+		};
+
+		CPUx_intc: interrupt-controller {
+			#address-cells = <0>;
+			#interrupt-cells = <1>;
+			interrupt-controller;
+			compatible = "riscv,cpu-intc";
 		};
 	};
 
@@ -61,27 +61,31 @@
 		mtimer: timer@fffffffff0040000 {
 			compatible = "scr,machine-timer";
 			reg = <0xffffffff 0xf0040000 0x1000>;
-			interrupts = <7 0>;
-			interrupt-parent = < &plic >;
+			interrupts = <7>;
+			interrupt-parent = <&CPUx_intc>;
 		};
 
 		plic: interrupt-controller@fffffffffe000000 {
 			#interrupt-cells = <2>;
 			compatible = "sifive,plic-1.0.0", "riscv,plic0";
 			interrupt-controller;
+			interrupts-extended = <&CPUx_intc 11>;	
 
 			reg = <0xffffffff 0xfe000000 0x00001000
 			0xffffffff 0xfe002000  0x00004000
 			0xffffffff 0xfe200000  0x00040000 >;
 			reg-names = "prio", "irq_en", "reg";
-			riscv,max-priority = <7>;
-			riscv,ndev = <16>;
+
+			riscv,max-priority = <4>;
+			riscv,ndev = <4>;
 		};
 
-		uart0: serial@ffffffffff010000 {
+		uart: serial@ffffffffff010000 {
 			compatible = "ns16550";
 			reg-shift = < 2 >;
 			reg = <0xffffffff 0xff010000 0x40>;
+			interrupt-parent = <&plic>;
+			interrupts = <1 1>; // IRQ PRIO
 			current-speed = <115200>;
 			clock-frequency = <65000000>;
 			status = "okay";
