@@ -22,11 +22,6 @@
 #include "cache.h"
 
 /******************************************************************************
- *                              Prototypes section
- */
-void machine_trap_entry(void);
-
-/******************************************************************************
  *                              Static variables section
  */
 #if IS_ENABLED(CONFIG_SCR_MPU)
@@ -39,18 +34,6 @@ static const scr_mem_region_info mem_regions[] = {
 /******************************************************************************
  *                              Implementation section
  */
-
-/**
- * @brief Machine Trap-Vector Base-Address (MTVEC) initialization
- */
-static void scr7_mtvec_init(void)
-{
-    __asm__ volatile ( "csrw mtvec, %0"
-                       ::
-                       "r"(machine_trap_entry):
-                     );
-}
-
 /**
  * @brief Do initialization proccess at boot time.
  *
@@ -58,11 +41,8 @@ static void scr7_mtvec_init(void)
  *
  * @return 0
  */
-static int riscv64_scr7_init(const struct device *arg )
+static int riscv64_scr7_init(const struct device *arg)
 {
-    /* Set up mtvec */
-    scr7_mtvec_init();
-
     /* Early MPU initialization - bring MPU to known state */
     if (IS_ENABLED(CONFIG_SCR_MPU))
     	scr_mpu_reset_init();
