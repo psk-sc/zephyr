@@ -13,15 +13,17 @@
 	compatible = "scr,vcu118_scr7";
 
 	soc {
-		ram: memory@0 {
+		ddr: memory@0 {
 			compatible = "zephyr,memory-region";
-			reg = <0x0 0x00000000 DT_SIZE_M(64)>;
-			zephyr,memory-region = "RAM";
+			reg = <0x0 0x0 0xFFFFFFFF>;
+			zephyr,memory-region = "DDR";
 		};
 	};
 
 	chosen {
 		zephyr,console = &uart;
+		/* Use DDR as SRAM by default */
+		zephyr,sram = &ddr;
 	};
 };
 

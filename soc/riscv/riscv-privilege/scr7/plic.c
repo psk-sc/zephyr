@@ -29,7 +29,7 @@
  */
 #if DT_HAS_COMPAT_STATUS_OKAY(sifive_plic_1_0_0)
 #define PLIC_NODE DT_NODELABEL(plic)
-#define SCR_PLIC_BASE DT_REG_ADDR_BY_NAME(PLIC_NODE, prio)
+#define SCR_PLIC_BASE UINT64_C(DT_REG_ADDR_BY_NAME(PLIC_NODE, prio))
 #else
 #error "No SCR PLIC devicetree information"
 #endif

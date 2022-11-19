@@ -48,9 +48,16 @@
 #elif DT_HAS_COMPAT_STATUS_OKAY(scr_machine_timer)
 #define DT_DRV_COMPAT scr_machine_timer
 
+#if IS_ENABLED(CONFIG_64BIT)
+#define MTIMEDIV_REG	(UINT64_C(DT_INST_REG_ADDR(0)) + 4)
+#define MTIME_REG	(UINT64_C(DT_INST_REG_ADDR(0)) + 8)
+#define MTIMECMP_REG	(UINT64_C(DT_INST_REG_ADDR(0)) + 16)
+#else
 #define MTIMEDIV_REG	(DT_INST_REG_ADDR(0) + 4)
 #define MTIME_REG	(DT_INST_REG_ADDR(0) + 8)
 #define MTIMECMP_REG	(DT_INST_REG_ADDR(0) + 16)
+#endif /* CONFIG_64BIT */
+
 #define TIMER_IRQN	DT_INST_IRQN(0)
 #endif
 

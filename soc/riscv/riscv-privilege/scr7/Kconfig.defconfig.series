@@ -37,10 +37,6 @@ config XIP
 	bool
 	default y
 
-config RISCV_RAM_SIZE_KB
-	int
-	default 64
-
 config SCR_MPU
 	bool "Syntacore MPU"
 	default y
