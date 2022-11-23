@@ -1,5 +1,5 @@
-identifier: vcu118_scr7
-name: VCU118 FPGA SCR7
+identifier: vcu118_scr9
+name: VCU118 FPGA SCR9
 type: mcu
 # Please comment "simulation: qemu" in order to run twister on real HW
 simulation: qemu

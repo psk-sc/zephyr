@@ -1,0 +1,23 @@
+# Kconfig - RISCV64_SCR9 SoC configuration options
+#
+# Copyright (C) Syntacore 2022. All rights reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+choice
+prompt "Syntacore SCR9-based SoC implementation"
+depends on SOC_SERIES_RISCV64_SCR9
+
+config SOC_RISCV64_SCR9
+	bool "Syntacore SCR9-based SoC implementation"
+	select RISCV_ISA_RV64I
+	select RISCV_ISA_EXT_M
+	select RISCV_ISA_EXT_A
+	select RISCV_ISA_EXT_C
+	select RISCV_ISA_EXT_F
+	select RISCV_ISA_EXT_D
+	select RISCV_ISA_EXT_ZICSR
+	select RISCV_ISA_EXT_ZIFENCEI
+
+endchoice

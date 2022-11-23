@@ -1,0 +1,29 @@
+/*
+ * Copyright (c) 2022 Syntacore
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+
+#include "syntacore/scr9.dtsi"
+
+/ {
+	model = "vcu118_scr9";
+	compatible = "scr,vcu118_scr9";
+
+	soc {
+		ddr: memory@0 {
+			compatible = "zephyr,memory-region";
+			reg = <0x0 0x0 0xFFFFFFFF>;
+			zephyr,memory-region = "DDR";
+		};
+	};
+
+	chosen {
+		zephyr,console = &uart;
+		/* Use DDR as SRAM by default */
+		zephyr,sram = &ddr;
+	};
+};
+

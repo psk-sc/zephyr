@@ -1,0 +1,4 @@
+
+config BOARD_VCU118_SCR9
+	bool "VCU118 FPGA SCR9 target"
+	depends on SOC_RISCV64_SCR9
