@@ -58,4 +58,4 @@ static int riscv64_scr9_init(const struct device *arg)
     return 0;
 }
 
-SYS_INIT(riscv64_scr9_init, EARLY, 0);
+SYS_INIT(riscv64_scr9_init, PRE_KERNEL_1, 0);
