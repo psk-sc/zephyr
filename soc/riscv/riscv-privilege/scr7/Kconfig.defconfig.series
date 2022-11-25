@@ -20,6 +20,12 @@ config RISCV_HAS_PLIC
 	bool
 	default y
 	
+config CPU_HAS_FPU_DOUBLE_PRECISION
+	bool "Double precision FPU"
+	default y
+	help
+		This option enables Double Floating Point precision Unit
+	
 config 2ND_LVL_ISR_TBL_OFFSET
 	default 12
 
